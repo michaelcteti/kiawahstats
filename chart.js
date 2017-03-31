@@ -4,7 +4,7 @@ var margin = {
     bottom: 6,
     left: 1
   },
-  width = 960 - margin.left - margin.right,
+  width = 1168 - margin.left - margin.right,
   height = 600 - margin.top - margin.bottom;
 
 var formatNumber = d3.format(",.0f"),
@@ -20,7 +20,7 @@ var svg = d3.select("#chart").append("svg")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var sankey = d3.sankey()
-  .nodeWidth(15)
+  .nodeWidth(25)
   .nodePadding(10)
   .size([width, height]);
 
@@ -66,7 +66,7 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       { "source": 0, "target": 2, "value": allHolesToPars },
       { "source": 0, "target": 3, "value": allHolesToBogeys },
       { "source": 0, "target": 4, "value": allHolesToDoubles }
-    ]
+    ];
   };
 
   if (byCourse == true && includePar == false && includeDrives == false && includeGreens == false) {
@@ -272,6 +272,253 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
     ]
   };
 
+  if (byCourse == true && includePar == true && includeDrives == true && includeGreens == true) {
+    nodes = [
+      { "name": "Turtle Point" },
+      { "name": "Ocean Course" },
+      { "name": "Oak Point" },
+      { "name": "Osprey Point" },
+      { "name": "Par 3" },
+      { "name": "Par 4" },
+      { "name": "Par 5" },
+      { "name": "In-Play Drive" },
+      { "name": "Out-of-Play Drive" },
+      { "name": "GIR" },
+      { "name": "No GIR" },
+      { "name": "Birdies" },
+      { "name": "Pars" },
+      { "name": "Bogeys" },
+      { "name": "Doubles" }
+    ];
+
+    TPToThrees = 0;
+    TPToFours = 0;
+    TPToFives = 0;
+    OCToThrees = 0;
+    OCToFours = 0;
+    OCToFives = 0;
+    OKToThrees = 0;
+    OKToFours = 0;
+    OKToFives = 0;
+    OPToThrees = 0;
+    OPToFours = 0;
+    OPToFives = 0;
+    ThreesToIPD = 0;
+    FoursToIPD = 0;
+    FivesToIPD = 0;
+    ThreesToOPD = 0;
+    FoursToOPD = 0;
+    FivesToOPD = 0;
+    IPDToGIR = 0;
+    OPDToGIR = 0;
+    IPDToNoGIR = 0;
+    OPDToNoGIR = 0;
+    GIRToBirdies = 0;
+    GIRToPars = 0;
+    GIRToBogeys = 0;
+    GIRToDoubles = 0;
+    NoGIRToBirdies = 0;
+    NoGIRToPars = 0;
+    NoGIRToBogeys = 0;
+    NoGIRToDoubles = 0;
+
+    rawData.map(function(datum) {
+      if (datum.Course == "TP") {
+        if (datum.P == 3) {
+          TPToThrees += 1;
+          if (datum.IPD == 1) {
+            ThreesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            ThreesToOPD += 1;
+          };
+        };
+        if (datum.P == 4) {
+          TPToFours += 1;
+          if (datum.IPD == 1) {
+            FoursToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FoursToOPD += 1;
+          };
+        };
+        if (datum.P == 5) {
+          TPToFives += 1;
+          if (datum.IPD == 1) {
+            FivesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FivesToOPD += 1;
+          };
+        };
+      };
+      if (datum.Course == "OC") {
+        if (datum.P == 3) {
+          OCToThrees += 1;
+          if (datum.IPD == 1) {
+            ThreesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            ThreesToOPD += 1;
+          };
+        };
+        if (datum.P == 4) {
+          OCToFours += 1;
+          if (datum.IPD == 1) {
+            FoursToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FoursToOPD += 1;
+          };
+        };
+        if (datum.P == 5) {
+          OCToFives += 1;
+          if (datum.IPD == 1) {
+            FivesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FivesToOPD += 1;
+          };
+        };
+      };
+      if (datum.Course == "OK") {
+        if (datum.P == 3) {
+          OKToThrees += 1;
+          if (datum.IPD == 1) {
+            ThreesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            ThreesToOPD += 1;
+          };
+        };
+        if (datum.P == 4) {
+          OKToFours += 1;
+          if (datum.IPD == 1) {
+            FoursToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FoursToOPD += 1;
+          };
+        };
+        if (datum.P == 5) {
+          OKToFives += 1;
+          if (datum.IPD == 1) {
+            FivesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FivesToOPD += 1;
+          };
+        };
+      };
+      if (datum.Course == "OP") {
+        if (datum.P == 3) {
+          OPToThrees += 1;
+          if (datum.IPD == 1) {
+            ThreesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            ThreesToOPD += 1;
+          };
+        };
+        if (datum.P == 4) {
+          OPToFours += 1;
+          if (datum.IPD == 1) {
+            FoursToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FoursToOPD += 1;
+          };
+        };
+        if (datum.P == 5) {
+          OPToFives += 1;
+          if (datum.IPD == 1) {
+            FivesToIPD += 1;
+          };
+          if (datum.IPD == 0) {
+            FivesToOPD += 1;
+          };
+        };
+      };
+      if (datum.IPD == 1) {
+        if (datum.GIR == 1) {
+          IPDToGIR += 1;
+        };
+        if (datum.GIR == 0) {
+          IPDToNoGIR += 1;
+        };
+      };
+      if (datum.IPD == 0) {
+        if (datum.GIR == 1) {
+          OPDToGIR += 1;
+        };
+        if (datum.GIR == 0) {
+          OPDToNoGIR += 1;
+        };
+      };
+      if (datum.GIR == 1) {
+        if (datum.BIR == 1){
+          GIRToBirdies += 1;
+        };
+        if (datum.PAR == 1){
+          GIRToPars += 1;
+        };
+        if (datum.BOG == 1){
+          GIRToBogeys += 1;
+        };
+        if (datum.DB == 1){
+          GIRToDoubles += 1;
+        };
+      };
+      if (datum.GIR == 0) {
+        if (datum.BIR == 1){
+          NoGIRToBirdies += 1;
+        };
+        if (datum.PAR == 1){
+          NoGIRToPars += 1;
+        };
+        if (datum.BOG == 1){
+          NoGIRToBogeys += 1;
+        };
+        if (datum.DB == 1){
+          NoGIRToDoubles += 1;
+        };
+      };
+    });
+
+    links = [
+      { "source": 0, "target": 4, "value": TPToThrees },
+      { "source": 0, "target": 5, "value": TPToFours },
+      { "source": 0, "target": 6, "value": TPToFives },
+      { "source": 1, "target": 4, "value": OCToThrees },
+      { "source": 1, "target": 5, "value": OCToFours },
+      { "source": 1, "target": 6, "value": OCToFives },
+      { "source": 2, "target": 4, "value": OKToThrees },
+      { "source": 2, "target": 5, "value": OKToFours },
+      { "source": 2, "target": 6, "value": OKToFives },
+      { "source": 3, "target": 4, "value": OPToThrees },
+      { "source": 3, "target": 5, "value": OPToFours },
+      { "source": 3, "target": 6, "value": OPToFives },
+      { "source": 4, "target": 7, "value": ThreesToIPD },
+      { "source": 5, "target": 7, "value": FoursToIPD },
+      { "source": 6, "target": 7, "value": FivesToIPD },
+      { "source": 4, "target": 8, "value": ThreesToOPD },
+      { "source": 5, "target": 8, "value": FoursToOPD },
+      { "source": 6, "target": 8, "value": FivesToOPD },
+      { "source": 7, "target": 9, "value": IPDToGIR },
+      { "source": 7, "target": 10, "value": IPDToNoGIR },
+      { "source": 8, "target": 9, "value": OPDToGIR },
+      { "source": 8, "target": 10, "value": OPDToNoGIR },
+      { "source": 9, "target": 11, "value": GIRToBirdies },
+      { "source": 9, "target": 12, "value": GIRToPars },
+      { "source": 9, "target": 13, "value": GIRToBogeys },
+      { "source": 9, "target": 14, "value": GIRToDoubles },
+      { "source": 10, "target": 11, "value": NoGIRToBirdies },
+      { "source": 10, "target": 12, "value": NoGIRToPars },
+      { "source": 10, "target": 13, "value": NoGIRToBogeys },
+      { "source": 10, "target": 14, "value": NoGIRToDoubles }
+    ];
+  };
+
   convertedStats = {
     nodes: nodes,
     links: links
@@ -286,11 +533,11 @@ d3.json("rawstats.json", function(error, json) {
   // convertStats(json, course, par, drive, green)
   // stats = convertStats(json, false, false, false, false) // All to Score DONE
   // stats = convertStats(json, true, false, false, false) // Course to Score DONE
-  stats = convertStats(json, false, true, false, false) // All to Par to Score DONE
+  // stats = convertStats(json, false, true, false, false) // All to Par to Score DONE
   // stats = convertStats(json, false, false, true, false) // All to Drive to Score
   // stats = convertStats(json, false, false, false, true) // All to Green to Score
   // stats = convertStats(json, true, false, true, true) // Course to Drive to Green to Score
-  // stats = convertStats(json, false, true, true, true) // Par to Drive to Green to Score
+  stats = convertStats(json, true, true, true, true) // Course to Par to Drive to Green to Score
 
   sankey
     .nodes(stats.nodes)
