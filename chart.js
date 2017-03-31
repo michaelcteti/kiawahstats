@@ -29,6 +29,7 @@ var stats;
 
 function convertStats(rawData, byCourse, includePar, includeDrives, includeGreens) {
   if (byCourse == null && includePar == null && includeDrives == null && includeGreens == null) {
+    // hard coded nodes....no way around this I can see
     nodes = [
       { "name": "All Holes" },
       { "name": "Birdies" },
@@ -37,11 +38,13 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       { "name": "Doubles" }
     ];
 
+    // counts to generate links between nodes. Also may be forced to be hard coded...
     allHolesToBirdies = 0;
     allHolesToPars = 0;
     allHolesToBogeys = 0;
     allHolesToDoubles = 0;
 
+    // mapping through data to update counts
     rawData.map(function(datum) {
       if (datum.BIR == 1){
         allHolesToBirdies += 1;
@@ -57,7 +60,8 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       };
     });
 
-    newLinks = [
+    // generate links...need to find a way to use indexes to do this...
+    links = [
       { "source": 0, "target": 1, "value": allHolesToBirdies },
       { "source": 0, "target": 2, "value": allHolesToPars },
       { "source": 0, "target": 3, "value": allHolesToBogeys },
@@ -67,7 +71,7 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
 
   convertedStats = {
     nodes: nodes,
-    links: newLinks
+    links: links
   }
 
   return convertedStats;
