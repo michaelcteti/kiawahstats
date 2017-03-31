@@ -4,7 +4,8 @@
   "description": "stats for d3 practice from kiawah national pro-am 2017",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c | uglifyjs -c -m > d3.min.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/michaelcteti/kiawahstats#readme",
   "dependencies": {
-    "live-server": "^1.2.0"
+    "d3": "^4.7.4",
+    "d3-sankey": "^0.4.2",
+    "live-server": "^1.2.0",
+    "rollup": "^0.34.13",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "uglify-js": "^2.6.1"
   }
 }

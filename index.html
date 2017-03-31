@@ -6,11 +6,31 @@
   #chart {
     height: 600px;
   }
+
+  .node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+  }
+
+  .node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+  }
+
+  .link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+  }
+
+  .link:hover {
+    stroke-opacity: .5;
+  }
 </style>
 <body>
   <h1>2017 Kiawah National Pro-Am Stats</h1>
   <div id="chart"></div>
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="https://unpkg.com/d3-sankey@0"></script>
+  <script src="d3.min.js"></script>
   <script src="chart.js"></script>
 </body>
