@@ -510,9 +510,9 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       { "source": 8, "target": 10, "value": OPDToNoGIR },
       { "source": 9, "target": 11, "value": GIRToBirdies },
       { "source": 9, "target": 12, "value": GIRToPars },
-      { "source": 9, "target": 13, "value": GIRToBogeys },
-      { "source": 9, "target": 14, "value": GIRToDoubles },
-      { "source": 10, "target": 11, "value": NoGIRToBirdies },
+      // { "source": 9, "target": 13, "value": GIRToBogeys },
+      // { "source": 9, "target": 14, "value": GIRToDoubles },
+      // { "source": 10, "target": 11, "value": NoGIRToBirdies },
       { "source": 10, "target": 12, "value": NoGIRToPars },
       { "source": 10, "target": 13, "value": NoGIRToBogeys },
       { "source": 10, "target": 14, "value": NoGIRToDoubles }
