@@ -519,6 +519,392 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
     ];
   };
 
+  if (byCourse == false && includePar == true && includeDrives == true && includeGreens == true) {
+    nodes = [
+      { "name": "Par 3" }, // 0
+      { "name": "Par 4" }, // 1
+      { "name": "Par 5" }, // 2
+
+      { "name": "In-Play Drive" }, // 3
+      { "name": "Out-of-Play Drive" }, // 4
+
+      { "name": "GIR" }, // 5
+      { "name": "No GIR" }, // 6
+
+      { "name": "Birdies" }, // 7
+      { "name": "Pars" }, // 8
+      { "name": "Bogeys" }, // 9
+      { "name": "Doubles" } // 10
+    ];
+
+    // Need a line that goes through each of 4 layers....for each of 48 options
+    // Somehow the lines need to be linked....probably means building out more graph info
+    // Rollups as well that go from any node back and forwards to each layer
+
+    TIGBir = 0;
+    TIGPar = 0;
+    TIGBog = 0;
+    TIGDob = 0;
+    TINBir = 0;
+    TINPar = 0;
+    TINBog = 0;
+    TINDob = 0;
+    TOGBir = 0;
+    TOGPar = 0;
+    TOGBog = 0;
+    TOGDob = 0;
+    TONBir = 0;
+    TONPar = 0;
+    TONBog = 0;
+    TONDob = 0;
+    FIGBir = 0;
+    FIGPar = 0;
+    FIGBog = 0;
+    FIGDob = 0;
+    FINBir = 0;
+    FINPar = 0;
+    FINBog = 0;
+    FINDob = 0;
+    FOGBir = 0;
+    FOGPar = 0;
+    FOGBog = 0;
+    FOGDob = 0;
+    FONBir = 0;
+    FONPar = 0;
+    FONBog = 0;
+    FONDob = 0;
+    SIGBir = 0;
+    SIGPar = 0;
+    SIGBog = 0;
+    SIGDob = 0;
+    SINBir = 0;
+    SINPar = 0;
+    SINBog = 0;
+    SINDob = 0;
+    SOGBir = 0;
+    SOGPar = 0;
+    SOGBog = 0;
+    SOGDob = 0;
+    SONBir = 0;
+    SONPar = 0;
+    SONBog = 0;
+    SONDob = 0;
+
+    rawData.map(function(datum) {
+      if (datum.P == 3) {
+        if (datum.IPD == 1) {
+          if (datum.GIR == 1) {
+            if (datum.BIR == 1 ) {
+              TIGBir += 1;
+            } else if (datum.PAR == 1) {
+              TIGPar += 1;
+            } else if (datum.BOG == 1) {
+              TIGBog += 1;
+            } else if (datum.DB == 1) {
+              TIGDob += 1;
+            };
+          } else {
+            if (datum.BIR == 1 ) {
+              TINBir += 1;
+            } else if (datum.PAR == 1) {
+              TINPar += 1;
+            } else if (datum.BOG == 1) {
+              TINBog += 1;
+            } else if (datum.DB == 1) {
+              TINDob += 1;
+            };
+          };
+        } else {
+          if (datum.GIR == 1) {
+            if (datum.BIR == 1 ) {
+              TOGBir += 1;
+            } else if (datum.PAR == 1) {
+              TOGPar += 1;
+            } else if (datum.BOG == 1) {
+              TOGBog += 1;
+            } else if (datum.DB == 1) {
+              TOGDob += 1;
+            };
+          } else {
+            if (datum.BIR == 1 ) {
+              TONBir += 1;
+            } else if (datum.PAR == 1) {
+              TONPar += 1;
+            } else if (datum.BOG == 1) {
+              TONBog += 1;
+            } else if (datum.DB == 1) {
+              TONDob += 1;
+            };
+          };
+        };
+      } else if (datum.P == 4) {
+        if (datum.IPD == 1) {
+          if (datum.GIR == 1) {
+            if (datum.BIR == 1 ) {
+              FIGBir += 1;
+            } else if (datum.PAR == 1) {
+              FIGPar += 1;
+            } else if (datum.BOG == 1) {
+              FIGBog += 1;
+            } else if (datum.DB == 1) {
+              FIGDob += 1;
+            };
+          } else {
+            if (datum.BIR == 1 ) {
+              FINBir += 1;
+            } else if (datum.PAR == 1) {
+              FINPar += 1;
+            } else if (datum.BOG == 1) {
+              FINBog += 1;
+            } else if (datum.DB == 1) {
+              FINDob += 1;
+            };
+          };
+        } else {
+          if (datum.GIR == 1) {
+            if (datum.BIR == 1 ) {
+              FOGBir += 1;
+            } else if (datum.PAR == 1) {
+              FOGPar += 1;
+            } else if (datum.BOG == 1) {
+              FOGBog += 1;
+            } else if (datum.DB == 1) {
+              FOGDob += 1;
+            };
+          } else {
+            if (datum.BIR == 1 ) {
+              FONBir += 1;
+            } else if (datum.PAR == 1) {
+              FONPar += 1;
+            } else if (datum.BOG == 1) {
+              FONBog += 1;
+            } else if (datum.DB == 1) {
+              FONDob += 1;
+            };
+          };
+        };
+      } else if (datum.P == 5) {
+        if (datum.IPD == 1) {
+          if (datum.GIR == 1) {
+            if (datum.BIR == 1 ) {
+              SIGBir += 1;
+            } else if (datum.PAR == 1) {
+              SIGPar += 1;
+            } else if (datum.BOG == 1) {
+              SIGBog += 1;
+            } else if (datum.DB == 1) {
+              SIGDob += 1;
+            };
+          } else {
+            if (datum.BIR == 1 ) {
+              SINBir += 1;
+            } else if (datum.PAR == 1) {
+              SINPar += 1;
+            } else if (datum.BOG == 1) {
+              SINBog += 1;
+            } else if (datum.DB == 1) {
+              SINDob += 1;
+            };
+          };
+        } else {
+          if (datum.GIR == 1) {
+            if (datum.BIR == 1 ) {
+              SOGBir += 1;
+            } else if (datum.PAR == 1) {
+              SOGPar += 1;
+            } else if (datum.BOG == 1) {
+              SOGBog += 1;
+            } else if (datum.DB == 1) {
+              SOGDob += 1;
+            };
+          } else {
+            if (datum.BIR == 1 ) {
+              SONBir += 1;
+            } else if (datum.PAR == 1) {
+              SONPar += 1;
+            } else if (datum.BOG == 1) {
+              SONBog += 1;
+            } else if (datum.DB == 1) {
+              SONDob += 1;
+            };
+          };
+        };
+      };
+    });
+
+    links = [
+      { "source": 0, "target": 3, "value": TIGBir },
+      { "source": 3, "target": 5, "value": TIGBir },
+      { "source": 5, "target": 7, "value": TIGBir },
+      { "source": 0, "target": 3, "value": TIGPar },
+      { "source": 3, "target": 5, "value": TIGPar },
+      { "source": 5, "target": 8, "value": TIGPar },
+      { "source": 0, "target": 3, "value": TIGBog },
+      { "source": 3, "target": 5, "value": TIGBog },
+      { "source": 5, "target": 9, "value": TIGBog },
+      { "source": 0, "target": 3, "value": TIGDob },
+      { "source": 3, "target": 5, "value": TIGDob },
+      { "source": 5, "target": 10, "value": TIGDob },
+
+      { "source": 0, "target": 3, "value": TINBir },
+      { "source": 3, "target": 6, "value": TINBir },
+      { "source": 6, "target": 7, "value": TINBir },
+      { "source": 0, "target": 3, "value": TINPar },
+      { "source": 3, "target": 6, "value": TINPar },
+      { "source": 6, "target": 8, "value": TINPar },
+      { "source": 0, "target": 3, "value": TINBog },
+      { "source": 3, "target": 6, "value": TINBog },
+      { "source": 6, "target": 9, "value": TINBog },
+      { "source": 0, "target": 3, "value": TINDob },
+      { "source": 3, "target": 6, "value": TINDob },
+      { "source": 6, "target": 10, "value": TINDob },
+
+      { "source": 0, "target": 4, "value": TOGBir },
+      { "source": 4, "target": 5, "value": TOGBir },
+      { "source": 5, "target": 7, "value": TOGBir },
+      { "source": 0, "target": 4, "value": TOGPar },
+      { "source": 4, "target": 5, "value": TOGPar },
+      { "source": 5, "target": 8, "value": TOGPar },
+      { "source": 0, "target": 4, "value": TOGBog },
+      { "source": 4, "target": 5, "value": TOGBog },
+      { "source": 5, "target": 9, "value": TOGBog },
+      { "source": 0, "target": 4, "value": TOGDob },
+      { "source": 4, "target": 5, "value": TOGDob },
+      { "source": 5, "target": 10, "value": TOGDob },
+
+      { "source": 0, "target": 4, "value": TONBir },
+      { "source": 4, "target": 6, "value": TONBir },
+      { "source": 6, "target": 7, "value": TONBir },
+      { "source": 0, "target": 4, "value": TONPar },
+      { "source": 4, "target": 6, "value": TONPar },
+      { "source": 6, "target": 8, "value": TONPar },
+      { "source": 0, "target": 4, "value": TONBog },
+      { "source": 4, "target": 6, "value": TONBog },
+      { "source": 6, "target": 9, "value": TONBog },
+      { "source": 0, "target": 4, "value": TONDob },
+      { "source": 4, "target": 6, "value": TONDob },
+      { "source": 6, "target": 10, "value": TONDob },
+
+      { "source": 1, "target": 3, "value": FIGBir },
+      { "source": 3, "target": 5, "value": FIGBir },
+      { "source": 5, "target": 7, "value": FIGBir },
+      { "source": 1, "target": 3, "value": FIGPar },
+      { "source": 3, "target": 5, "value": FIGPar },
+      { "source": 5, "target": 8, "value": FIGPar },
+      { "source": 1, "target": 3, "value": FIGBog },
+      { "source": 3, "target": 5, "value": FIGBog },
+      { "source": 5, "target": 9, "value": FIGBog },
+      { "source": 1, "target": 3, "value": FIGDob },
+      { "source": 3, "target": 5, "value": FIGDob },
+      { "source": 5, "target": 10, "value": FIGDob },
+
+      { "source": 1, "target": 3, "value": FINBir },
+      { "source": 3, "target": 6, "value": FINBir },
+      { "source": 6, "target": 7, "value": FINBir },
+      { "source": 1, "target": 3, "value": FINPar },
+      { "source": 3, "target": 6, "value": FINPar },
+      { "source": 6, "target": 8, "value": FINPar },
+      { "source": 1, "target": 3, "value": FINBog },
+      { "source": 3, "target": 6, "value": FINBog },
+      { "source": 6, "target": 9, "value": FINBog },
+      { "source": 1, "target": 3, "value": FINDob },
+      { "source": 3, "target": 6, "value": FINDob },
+      { "source": 6, "target": 10, "value": FINDob },
+
+      { "source": 1, "target": 4, "value": FOGBir },
+      { "source": 4, "target": 5, "value": FOGBir },
+      { "source": 5, "target": 7, "value": FOGBir },
+      { "source": 1, "target": 4, "value": FOGPar },
+      { "source": 4, "target": 5, "value": FOGPar },
+      { "source": 5, "target": 8, "value": FOGPar },
+      { "source": 1, "target": 4, "value": FOGBog },
+      { "source": 4, "target": 5, "value": FOGBog },
+      { "source": 5, "target": 9, "value": FOGBog },
+      { "source": 1, "target": 4, "value": FOGDob },
+      { "source": 4, "target": 5, "value": FOGDob },
+      { "source": 5, "target": 10, "value": FOGDob },
+
+      { "source": 1, "target": 4, "value": FONBir },
+      { "source": 4, "target": 6, "value": FONBir },
+      { "source": 6, "target": 7, "value": FONBir },
+      { "source": 1, "target": 4, "value": FONPar },
+      { "source": 4, "target": 6, "value": FONPar },
+      { "source": 6, "target": 8, "value": FONPar },
+      { "source": 1, "target": 4, "value": FONBog },
+      { "source": 4, "target": 6, "value": FONBog },
+      { "source": 6, "target": 9, "value": FONBog },
+      { "source": 1, "target": 4, "value": FONDob },
+      { "source": 4, "target": 6, "value": FONDob },
+      { "source": 6, "target": 10, "value": FONDob },
+
+      { "source": 0, "target": 4, "value": TONBir },
+      { "source": 4, "target": 6, "value": TONBir },
+      { "source": 6, "target": 7, "value": TONBir },
+      { "source": 0, "target": 4, "value": TONPar },
+      { "source": 4, "target": 6, "value": TONPar },
+      { "source": 6, "target": 8, "value": TONPar },
+      { "source": 0, "target": 4, "value": TONBog },
+      { "source": 4, "target": 6, "value": TONBog },
+      { "source": 6, "target": 9, "value": TONBog },
+      { "source": 0, "target": 4, "value": TONDob },
+      { "source": 4, "target": 6, "value": TONDob },
+      { "source": 6, "target": 10, "value": TONDob },
+
+      { "source": 2, "target": 3, "value": SIGBir },
+      { "source": 3, "target": 5, "value": SIGBir },
+      { "source": 5, "target": 7, "value": SIGBir },
+      { "source": 2, "target": 3, "value": SIGPar },
+      { "source": 3, "target": 5, "value": SIGPar },
+      { "source": 5, "target": 8, "value": SIGPar },
+      { "source": 2, "target": 3, "value": SIGBog },
+      { "source": 3, "target": 5, "value": SIGBog },
+      { "source": 5, "target": 9, "value": SIGBog },
+      { "source": 2, "target": 3, "value": SIGDob },
+      { "source": 3, "target": 5, "value": SIGDob },
+      { "source": 5, "target": 10, "value": SIGDob },
+
+      { "source": 2, "target": 3, "value": SINBir },
+      { "source": 3, "target": 6, "value": SINBir },
+      { "source": 6, "target": 7, "value": SINBir },
+      { "source": 2, "target": 3, "value": SINPar },
+      { "source": 3, "target": 6, "value": SINPar },
+      { "source": 6, "target": 8, "value": SINPar },
+      { "source": 2, "target": 3, "value": SINBog },
+      { "source": 3, "target": 6, "value": SINBog },
+      { "source": 6, "target": 9, "value": SINBog },
+      { "source": 2, "target": 3, "value": SINDob },
+      { "source": 3, "target": 6, "value": SINDob },
+      { "source": 6, "target": 10, "value": SINDob },
+
+      { "source": 2, "target": 4, "value": SOGBir },
+      { "source": 4, "target": 5, "value": SOGBir },
+      { "source": 5, "target": 7, "value": SOGBir },
+      { "source": 2, "target": 4, "value": SOGPar },
+      { "source": 4, "target": 5, "value": SOGPar },
+      { "source": 5, "target": 8, "value": SOGPar },
+      { "source": 2, "target": 4, "value": SOGBog },
+      { "source": 4, "target": 5, "value": SOGBog },
+      { "source": 5, "target": 9, "value": SOGBog },
+      { "source": 2, "target": 4, "value": SOGDob },
+      { "source": 4, "target": 5, "value": SOGDob },
+      { "source": 5, "target": 10, "value": SOGDob },
+
+      { "source": 2, "target": 4, "value": SONBir },
+      { "source": 4, "target": 6, "value": SONBir },
+      { "source": 6, "target": 7, "value": SONBir },
+      { "source": 2, "target": 4, "value": SONPar },
+      { "source": 4, "target": 6, "value": SONPar },
+      { "source": 6, "target": 8, "value": SONPar },
+      { "source": 2, "target": 4, "value": SONBog },
+      { "source": 4, "target": 6, "value": SONBog },
+      { "source": 6, "target": 9, "value": SONBog },
+      { "source": 2, "target": 4, "value": SONDob },
+      { "source": 4, "target": 6, "value": SONDob },
+      { "source": 6, "target": 10, "value": SONDob }
+    ];
+
+  };
+
   convertedStats = {
     nodes: nodes,
     links: links
@@ -531,13 +917,11 @@ d3.json("rawstats.json", function(error, json) {
   if (error) return console.warn(error);
 
   // convertStats(json, course, par, drive, green)
-  // stats = convertStats(json, false, false, false, false) // All to Score DONE
-  // stats = convertStats(json, true, false, false, false) // Course to Score DONE
-  // stats = convertStats(json, false, true, false, false) // All to Par to Score DONE
-  // stats = convertStats(json, false, false, true, false) // All to Drive to Score
-  // stats = convertStats(json, false, false, false, true) // All to Green to Score
-  // stats = convertStats(json, true, false, true, true) // Course to Drive to Green to Score
-  stats = convertStats(json, true, true, true, true) // Course to Par to Drive to Green to Score
+  // stats = convertStats(json, false, false, false, false) // All to Score
+  // stats = convertStats(json, true, false, false, false) // Course to Score
+  // stats = convertStats(json, false, true, false, false) // All to Par to Score
+  // stats = convertStats(json, true, true, true, true) // Course to Par to Drive to Green to Score
+  stats = convertStats(json, false, true, true, true) // Par to Drive to Green to Score - NEW
 
   sankey
     .nodes(stats.nodes)
