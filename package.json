@@ -17,8 +17,6 @@
   },
   "homepage": "https://github.com/michaelcteti/kiawahstats#readme",
   "dependencies": {
-    "d3": "^4.7.4",
-    "d3-sankey": "^0.4.2",
     "live-server": "^1.2.0"
   }
 }
