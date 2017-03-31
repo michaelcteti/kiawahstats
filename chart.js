@@ -25,17 +25,66 @@ var sankey = d3.sankey()
   .size([width, height]);
 
 var path = sankey.link();
+var stats;
 
-d3.json("teststats.json", function(error, energy) {
+function convertStats(rawData, byCourse, includePar, includeDrives, includeGreens) {
+  if (byCourse == null && includePar == null && includeDrives == null && includeGreens == null) {
+    nodes = [
+      { "name": "All Holes" },
+      { "name": "Birdies" },
+      { "name": "Pars" },
+      { "name": "Bogeys" },
+      { "name": "Doubles" }
+    ];
+
+    allHolesToBirdies = 0;
+    allHolesToPars = 0;
+    allHolesToBogeys = 0;
+    allHolesToDoubles = 0;
+
+    rawData.map(function(datum) {
+      if (datum.BIR == 1){
+        allHolesToBirdies += 1;
+      };
+      if (datum.PAR == 1){
+        allHolesToPars += 1;
+      };
+      if (datum.BOG == 1){
+        allHolesToBogeys += 1;
+      };
+      if (datum.DB == 1){
+        allHolesToDoubles += 1;
+      };
+    });
+
+    newLinks = [
+      { "source": 0, "target": 1, "value": allHolesToBirdies },
+      { "source": 0, "target": 2, "value": allHolesToPars },
+      { "source": 0, "target": 3, "value": allHolesToBogeys },
+      { "source": 0, "target": 4, "value": allHolesToDoubles }
+    ]
+  }
+
+  convertedStats = {
+    nodes: nodes,
+    links: newLinks
+  }
+
+  return convertedStats;
+};
+
+d3.json("rawstats.json", function(error, json) {
   if (error) return console.warn(error);
 
+  stats = convertStats(json)
+
   sankey
-    .nodes(energy.nodes)
-    .links(energy.links)
+    .nodes(stats.nodes)
+    .links(stats.links)
     .layout(32);
 
   var link = svg.append("g").selectAll(".link")
-    .data(energy.links)
+    .data(stats.links)
     .enter().append("path")
     .attr("class", "link")
     .attr("d", path)
@@ -52,7 +101,7 @@ d3.json("teststats.json", function(error, energy) {
     });
 
   var node = svg.append("g").selectAll(".node")
-    .data(energy.nodes)
+    .data(stats.nodes)
     .enter().append("g")
     .attr("class", "node")
     .attr("transform", function(d) {
