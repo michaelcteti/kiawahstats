@@ -837,19 +837,6 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       { "source": 4, "target": 6, "value": FONDob },
       { "source": 6, "target": 10, "value": FONDob },
 
-      { "source": 0, "target": 4, "value": TONBir },
-      { "source": 4, "target": 6, "value": TONBir },
-      { "source": 6, "target": 7, "value": TONBir },
-      { "source": 0, "target": 4, "value": TONPar },
-      { "source": 4, "target": 6, "value": TONPar },
-      { "source": 6, "target": 8, "value": TONPar },
-      { "source": 0, "target": 4, "value": TONBog },
-      { "source": 4, "target": 6, "value": TONBog },
-      { "source": 6, "target": 9, "value": TONBog },
-      { "source": 0, "target": 4, "value": TONDob },
-      { "source": 4, "target": 6, "value": TONDob },
-      { "source": 6, "target": 10, "value": TONDob },
-
       { "source": 2, "target": 3, "value": SIGBir },
       { "source": 3, "target": 5, "value": SIGBir },
       { "source": 5, "target": 7, "value": SIGBir },
@@ -910,6 +897,9 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       };
     })
   };
+
+  console.log(links.length / 3)
+  console.log(linksWithZero.length / 3)
 
   convertedStats = {
     nodes: nodes,
