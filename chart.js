@@ -732,7 +732,7 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       };
     });
 
-    links = [
+    linksWithZero = [
       { "source": 0, "target": 3, "value": TIGBir },
       { "source": 3, "target": 5, "value": TIGBir },
       { "source": 5, "target": 7, "value": TIGBir },
@@ -903,6 +903,12 @@ function convertStats(rawData, byCourse, includePar, includeDrives, includeGreen
       { "source": 6, "target": 10, "value": SONDob }
     ];
 
+    links = [];
+    linksWithZero.map(function(link) {
+      if (link.value > 0) {
+        links.push(link)
+      };
+    })
   };
 
   convertedStats = {
