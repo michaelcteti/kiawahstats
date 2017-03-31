@@ -1,0 +1,22 @@
+{
+  "name": "kiawahstats",
+  "version": "1.0.0",
+  "description": "stats for d3 practice from kiawah national pro-am 2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelcteti/kiawahstats.git"
+  },
+  "author": "michaelcteti@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelcteti/kiawahstats/issues"
+  },
+  "homepage": "https://github.com/michaelcteti/kiawahstats#readme",
+  "dependencies": {
+    "live-server": "^1.2.0"
+  }
+}
